@@ -16,6 +16,6 @@
 
 
 
-Upload a csv of the measurements:
+Upload a dataset of your interest:
 
 <input type="file" on:change={handleChange} />
