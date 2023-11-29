@@ -1,1 +1,5 @@
-<script>import "/src/app.postcss";</script><slot></slot>
+<script>
+    import "/src/app.postcss";
+    import "../../../app.css";
+</script>
+<slot></slot>

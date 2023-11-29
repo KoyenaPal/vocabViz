@@ -1,9 +1,33 @@
+<svelte:head>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js" type="text/javascript"></script>
+</svelte:head>
+
 <script>
-	/** @type {import('./$types').PageData} */
+  /** @type {import('./$types').PageData} */
 	export let data;
-  import { Tabs, TabItem } from 'flowbite-svelte';
+  import { Tabs, TabItem, Card } from 'flowbite-svelte';
   import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, TableSearch } from 'flowbite-svelte';
 
+  import { onMount } from 'svelte';
+	
+
+	// TODO load in the whole overall PCA plot, and then zoom in to specific marker 
+	export let trace1 = {
+    x: [1, 2, 3, 4],
+    y: [10, 15, 13, 17],
+    mode: 'markers',
+    type: 'scatter'
+  };
+
+  export var plotData = [trace1];
+
+  // https://plotly.com/javascript/plotlyjs-function-reference/
+  onMount(() => {
+    let plotDiv = document.getElementById('plotDiv');				
+    let Plot = new Plotly.newPlot(plotDiv, plotData, {}, {showSendToCloud:true}); 
+  });
+
+  // search bar stuff 
   let exampleSearchTerm = '';
   $: exampleItems = data.examples
   $: filteredExamples = exampleItems.filter((item) => item.example.toLowerCase().indexOf(exampleSearchTerm.toLowerCase()) !== -1);
@@ -17,13 +41,18 @@
   $: filteredDistant = distantItems.filter((item) => item.entry.toLowerCase().indexOf(distantSearchTerm.toLowerCase()) !== -1);
 </script>
 
-<div class="pt-5 pl-5">
+<div class="pt-5 pl-5 pagetitle">
   <center><h1>Llama-2-7b Vocabulary</h1></center>
+  <!-- <center><h1>{data.entry}</h1></center>
+  <center><p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Confidence: {data.confidence}</p></center> -->
 </div>
 
-<div class="pt-5 pl-5">
-  <h2>{data.entry}</h2>
-  <p><i>Confidence: {data.confidence}</i></p>
+<br>
+
+<div class="vocabcard">
+  <!-- <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{data.entry}</h5>
+  <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight"><i>Confidence: {data.confidence}</i></p> -->
+  <h1>{data.entry}</h1> <h2>Confidence: {data.confidence}</h2>
 </div>
 
 <!-- TODO add in functionality for local visualiation of data.feature with plotly PCA PLOT -->
@@ -91,3 +120,7 @@
   </Tabs>
 </div>
 
+<!-- https://svelte.dev/repl/fd99eae453e84027ba244eb72cf4667e?version=4.2.7 -->
+<div class="plotly">
+<div id="plotDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
+</div>
