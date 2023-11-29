@@ -2,7 +2,8 @@ import { error } from '@sveltejs/kit';
 
 /** @type {import('./$types').PageLoad} */export function load({ params }) {	
 	if (params.slug == '1') {
-		return {			
+		return {
+			id: 1,			
 			entry: 'Star Wars',			
 			tokens: ['Star', 'Wars'],
 			confidence: 0.788,
@@ -23,7 +24,8 @@ import { error } from '@sveltejs/kit';
 		};	
 	}
 	else if (params.slug === '2') {		
-		return {			
+		return {		
+			id: 2,	
 			entry: 'Village Vanguard',			
 			tokens: ['Village', 'Vanguard'],
 			confidence: 0.64,

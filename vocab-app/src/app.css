@@ -8,24 +8,48 @@ h2 {
     font-size: xx-large;
 }
 
+.parent {
+    padding: 1rem 1rem;
+    text-align: center;
+  }
+.child {
+display: inline-block;
+padding: 2rem 2rem;
+vertical-align: middle;
+}
+
+.parentl {
+    padding: 1rem 1rem;
+  }
+  .childl {
+    display: inline-block;
+    padding: 1rem 1rem;
+    vertical-align: top;
+    width: 40%;
+  }
+  .small-chart-container {
+    display: inline-block;
+    padding: 2rem 1rem;
+    vertical-align: top;
+    width: 50%;
+    height: 500px;
+    margin-top: 0%
+  }
+
 .vocabcard {
     padding-left: 20px;
     padding-bottom: 20px;
-    /* justify-content: center; */
 }
 
-.plotly {
-    /* border: 1px solid black; */
-    padding-left: 20px;
-    padding-right: 20px;
-}
 
 /* stuff for home page */
 .home-search {
     padding-left: 40px;
-    width: 80%;
-    height: 300px;
+    width: 75%;
+    height: 250px;
     margin: auto;
+    margin-top: 3%;
+    margin-bottom:40%;
 }
 
 .overflow-auto {
@@ -35,8 +59,8 @@ h2 {
 
 .home-text {
     font-size: larger;
-    margin: auto;
     width: 80%;
+    margin-bottom: -2%;
 }
 
 /* stuff from LayerCake scatterplot */
@@ -48,8 +72,9 @@ h2 {
   */
   .chart-container {
     width: 80%;
-    height: 250px;
-    margin-top: 14%
+    height: 800px;
+    /* height: 100%; */
+    margin-top: 0%
   }
   .circle {
     position: absolute;

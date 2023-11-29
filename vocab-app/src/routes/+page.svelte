@@ -2,7 +2,7 @@
   /** @type {import('./$types').PageData} */
 
   // search for pages functionality
-  import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, TableSearch } from 'flowbite-svelte';
+  import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, TableSearch, Card } from 'flowbite-svelte';
   let searchTerm = '';
   let items = [{			
         id: 1,
@@ -37,149 +37,7 @@
         ],
         close: ['Birdland', 'Blue Note'],
         distant: ['McDonalds', 'Signal Hill Centre']
-    },
-    {			
-        id: 2,
-        entry: 'Village Vanguard',			
-        tokens: ['Village', 'Vanguard'],
-        confidence: 0.64,
-        vector: [.8,-0.2],
-        examples: [
-            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
-            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
-            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
-        ],
-        close: ['Birdland', 'Blue Note'],
-        distant: ['McDonalds', 'Signal Hill Centre']
-    },
-    {			
-        id: 2,
-        entry: 'Village Vanguard',			
-        tokens: ['Village', 'Vanguard'],
-        confidence: 0.64,
-        vector: [.8,-0.2],
-        examples: [
-            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
-            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
-            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
-        ],
-        close: ['Birdland', 'Blue Note'],
-        distant: ['McDonalds', 'Signal Hill Centre']
-    },
-    {			
-        id: 2,
-        entry: 'Village Vanguard',			
-        tokens: ['Village', 'Vanguard'],
-        confidence: 0.64,
-        vector: [.8,-0.2],
-        examples: [
-            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
-            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
-            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
-        ],
-        close: ['Birdland', 'Blue Note'],
-        distant: ['McDonalds', 'Signal Hill Centre']
-    },
-    {			
-        id: 2,
-        entry: 'Village Vanguard',			
-        tokens: ['Village', 'Vanguard'],
-        confidence: 0.64,
-        vector: [.8,-0.2],
-        examples: [
-            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
-            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
-            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
-        ],
-        close: ['Birdland', 'Blue Note'],
-        distant: ['McDonalds', 'Signal Hill Centre']
-    },
-    {			
-        id: 2,
-        entry: 'Village Vanguard',			
-        tokens: ['Village', 'Vanguard'],
-        confidence: 0.64,
-        vector: [.8,-0.2],
-        examples: [
-            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
-            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
-            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
-        ],
-        close: ['Birdland', 'Blue Note'],
-        distant: ['McDonalds', 'Signal Hill Centre']
-    },
-    {			
-        id: 2,
-        entry: 'Village Vanguard',			
-        tokens: ['Village', 'Vanguard'],
-        confidence: 0.64,
-        vector: [.8,-0.2],
-        examples: [
-            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
-            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
-            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
-        ],
-        close: ['Birdland', 'Blue Note'],
-        distant: ['McDonalds', 'Signal Hill Centre']
-    },
-    {			
-        id: 2,
-        entry: 'Village Vanguard',			
-        tokens: ['Village', 'Vanguard'],
-        confidence: 0.64,
-        vector: [.8,-0.2],
-        examples: [
-            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
-            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
-            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
-        ],
-        close: ['Birdland', 'Blue Note'],
-        distant: ['McDonalds', 'Signal Hill Centre']
-    },
-    {			
-        id: 2,
-        entry: 'Village Vanguard',			
-        tokens: ['Village', 'Vanguard'],
-        confidence: 0.64,
-        vector: [.8,-0.2],
-        examples: [
-            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
-            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
-            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
-        ],
-        close: ['Birdland', 'Blue Note'],
-        distant: ['McDonalds', 'Signal Hill Centre']
-    },
-    {			
-        id: 2,
-        entry: 'Village Vanguard',			
-        tokens: ['Village', 'Vanguard'],
-        confidence: 0.64,
-        vector: [.8,-0.2],
-        examples: [
-            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
-            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
-            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
-        ],
-        close: ['Birdland', 'Blue Note'],
-        distant: ['McDonalds', 'Signal Hill Centre']
-    },
-    {			
-        id: 2,
-        entry: 'Village Vanguard',			
-        tokens: ['Village', 'Vanguard'],
-        confidence: 0.64,
-        vector: [.8,-0.2],
-        examples: [
-            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
-            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
-            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
-        ],
-        close: ['Birdland', 'Blue Note'],
-        distant: ['McDonalds', 'Signal Hill Centre']
-    },
-  
-    ]
+    }]
   $: filteredItems = items.filter((item) => item.entry.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
 
 
@@ -208,54 +66,46 @@
 <center>
 <div class="pt-5 pl-10 pb-10 pr-10">
   <h1>What Concepts Does Llama 2 Know?</h1>
-  <p class="home-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-    when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-    It has survived not only five centuries, but also the leap into electronic typesetting, 
-    remaining essentially unchanged. It was popularised in the 1960s with the release of 
-    Letraset sheets containing Lorem Ipsum passages, and more recently with desktop 
-    publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  <p class="home-text">Large Language Models (LLMs) like Llama 2 seem to store a lot of information about the world, 
+    but nobody knows exactly <i>what</i> information they store, and <i>how</i> that information is represented. One problem
+    is that when LLMs process input text, everything is represented as sequences of independent <b>tokens.</b> This means that,
+
+    
+    What concepts do language models "know?" 
+    Many important concepts are processed by large language models (LLMs) 
+    as sequences of disconnected words. How can we know which sequences of 
+    words a model might see as one concept (``Star'' and ``Wars'') versus words 
+    a model might view as unrelated (e.g. ``Sun'' and ``Battle'')? In parallel 
+    with our work on identifying these phrases, we designed this visualization tool.</p>
   
 
 
 </div>
 </center>
 
-
-<div class="home-search">
-<center><h2>Explore Llama-2-7b's Vocabulary Space</h2></center>
-
-<TableSearch class="search-bar" placeholder="Search for a concept..." hoverable={true} bind:inputValue={searchTerm}>
-  <TableHead>
-    <TableHeadCell>ID</TableHeadCell>
-    <TableHeadCell>Entry</TableHeadCell>
-    <TableHeadCell>Confidence</TableHeadCell>
-    <TableHeadCell>Top Example</TableHeadCell>
-  </TableHead>
-
-  <div class='overflow-auto'>
-  <TableBody>
-    {#each filteredItems as item}
-      <TableBodyRow>
-        <TableBodyCell>{item.id}</TableBodyCell>
-        <TableBodyCell>{item.entry}</TableBodyCell>
-        <TableBodyCell>{item.confidence}</TableBodyCell>
-        <TableBodyCell>{item.examples[0].example}</TableBodyCell>
-      </TableBodyRow>
-    {/each}
-  </TableBody>
-  </div>
-  
-</TableSearch>
+<div class="parent">
+  <!-- TODO for loop that randomly selects elements and displays four  -->
+  <div class="child"><Card href="/vocab/{1}">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">placeholder</h5>
+    <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">See Vocabulary Page</p>
+  </Card></div>
+  <div class="child"><Card href="/cards">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">placeholder</h5>
+    <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">See Vocabulary Page</p>
+  </Card></div>
+  <div class="child"><Card href="/cards">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">placeholder</h5>
+    <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">See Vocabulary Page</p>
+  </Card></div>
+  <div class="child"><Card href="/cards">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">placeholder</h5>
+    <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">See Vocabulary Page</p>
+  </Card></div>
 </div>
-
 
 <!-- TODO: zooming in automatically for vocab page, and showing term when you hover. -->
 <center>
-
 <div class="chart-container">
-  <h2>Explore Word Distributions</h2>
-  <p class="home-text">The enriched hidden state for every vocabulary entry is plotted below. Explore this, or individual words. </p>
   <LayerCake
     padding={{ top: 0, right: 5, bottom: 20, left: 25 }}
     x={xKey}
@@ -292,3 +142,27 @@
   </LayerCake>
 </div>
 </center>
+
+<div class="home-search">
+  <center><h2>Explore Llama-2-7b's Vocabulary Space</h2></center>
+  
+  <TableSearch class="search-bar" placeholder="Search for a concept..." hoverable={true} bind:inputValue={searchTerm}>
+    <TableHead>
+      <TableHeadCell>ID</TableHeadCell>
+      <TableHeadCell>Entry</TableHeadCell>
+      <TableHeadCell>Confidence</TableHeadCell>
+      <TableHeadCell>Top Example</TableHeadCell>
+    </TableHead>
+  
+    <TableBody>
+      {#each filteredItems as item}
+        <TableBodyRow>
+          <TableBodyCell>{item.id}</TableBodyCell>
+          <TableBodyCell>{item.entry}</TableBodyCell>
+          <TableBodyCell>{item.confidence}</TableBodyCell>
+          <TableBodyCell>{item.examples[0].example}</TableBodyCell>
+        </TableBodyRow>
+      {/each}
+    </TableBody>
+  </TableSearch>
+  </div>
