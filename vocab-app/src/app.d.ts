@@ -9,4 +9,6 @@ declare global {
 	}
 }
 
+declare module 'd3';
+
 export {};
