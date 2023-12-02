@@ -1,44 +1,76 @@
-<script>  
+<script lang="ts">  
   /** @type {import('./$types').PageData} */
 
   // search for pages functionality
   import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, TableSearch, Card } from 'flowbite-svelte';
+  import {onMount} from 'svelte';
+  import papa from 'papaparse';
   let searchTerm = '';
-  let items = [{			
-        id: 1,
-        entry: 'Star Wars',			
-        tokens: ['Star', 'Wars'],
-        confidence: 0.788,
-        vector: [.762,1.2],
-        examples: [
-            { doc: 341, example: 'The Star Wars franchise has grossed over 46 billion dollars...' },
-            { doc: 222, example: 'The Star Wars prequels are absolute fire!!!!' },
-            { doc: 13, example: 'I watched Star Wars for the first time and its mid'},
-            ],
-        close: [
-            { id: 15, distance: 341, entry: 'Indiana Jones' },
-            { id: 18, distance: 222, entry: 'Star Trek' },
-            ],
-        distant: [
-            { id: 145, distance: 341, entry: 'Banff National Park' },
-            { id: 21, distance: 222, entry: 'Cuban Sandwiches' },
-            ],
-        }, 
-	    {			
-        id: 2,
-        entry: 'Village Vanguard',			
-        tokens: ['Village', 'Vanguard'],
-        confidence: 0.64,
-        vector: [.8,-0.2],
-        examples: [
-            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
-            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
-            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
-        ],
-        close: ['Birdland', 'Blue Note'],
-        distant: ['McDonalds', 'Signal Hill Centre']
-    }]
-  $: filteredItems = items.filter((item) => item.entry.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
+  
+  let file = "counterfact.csv";
+  let inputData: any = [];
+  onMount(()=>{
+    fetch(file)
+    .then(response => response.blob())
+    .then(blob => {
+      papa.parse(blob, {
+        header: true,
+        complete: function (results: any) {
+          inputData = results.data;
+          console.log('results', inputData); // this should also show the data
+        }
+      });
+    });
+  });
+  let items: any = []
+  inputData.forEach((data: any) => {
+    items[data.key] = {
+      id: data.case_id,
+      entry: data.subject,
+      confidence: 0.788,
+      vector: [.733, 1.2],
+      examples: data.prompt,
+      close: data.prompt,
+      distant: data.prompt
+    // Add more properties as needed
+  };});
+
+  // let items = [{			
+  //       id: 1,
+  //       entry: 'Star Wars',			
+  //       tokens: ['Star', 'Wars'],
+  //       confidence: 0.788,
+  //       vector: [.762,1.2],
+  //       examples: [
+  //           { doc: 341, example: 'The Star Wars franchise has grossed over 46 billion dollars...' },
+  //           { doc: 222, example: 'The Star Wars prequels are absolute fire!!!!' },
+  //           { doc: 13, example: 'I watched Star Wars for the first time and its mid'},
+  //           ],
+  //       close: [
+  //           { id: 15, distance: 341, entry: 'Indiana Jones' },
+  //           { id: 18, distance: 222, entry: 'Star Trek' },
+  //           ],
+  //       distant: [
+  //           { id: 145, distance: 341, entry: 'Banff National Park' },
+  //           { id: 21, distance: 222, entry: 'Cuban Sandwiches' },
+  //           ],
+  //       }, 
+	//     {			
+  //       id: 2,
+  //       entry: 'Village Vanguard',			
+  //       tokens: ['Village', 'Vanguard'],
+  //       confidence: 0.64,
+  //       vector: [.8,-0.2],
+  //       examples: [
+  //           {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
+  //           {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
+  //           {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
+  //       ],
+  //       close: ['Birdland', 'Blue Note'],
+  //       distant: ['McDonalds', 'Signal Hill Centre']
+  //   }]
+  // $: filteredItems = items.filter((item: any) => item.entry.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
+  $: filteredItems = items
 
 
   // https://layercake.graphics/example/ScatterWebgl
@@ -59,8 +91,27 @@
   data.forEach(d => {
     d[yKey] = +d[yKey];
   });
+  // function handleChange(event: any) {
+  //     let files = event.target.files;
+  //     console.log(files)
+  //     for (let f of files) {
+  //         papa.parse(f, {
+  //             header: true,
+  //             complete: function (results: any) {
+  //                 console.log(results);
+  //             }
+  //         });
+  //     }
+  // }
 
 </script>
+
+
+<!-- 
+Upload a dataset of your interest:
+
+<input type="file" on:change={handleChange} /> -->
+
 
 
 <center>

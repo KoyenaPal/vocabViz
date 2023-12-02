@@ -3,6 +3,7 @@
 
   function handleChange(event: any) {
       let files = event.target.files;
+      console.log(files)
       for (let f of files) {
           papa.parse(f, {
               header: true,

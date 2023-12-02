@@ -34,6 +34,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"papaparse": "^5.4.1"
+		"d3-quadtree": "^3.0.1",
+		"layercake": "^8.0.2",
+		"papaparse": "^5.4.1",
+		"regl": "^2.1.0"
 	}
 }
