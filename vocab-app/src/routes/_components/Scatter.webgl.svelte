@@ -16,10 +16,9 @@
     export let r = 5;
   
     /** @type {String} [fill='#0cf'] - The circle's fill color. */
-    export let fill = '#0cf';
-    export let highlight_color = '#f02'
+    export let fill = '#08f';
   
-    export let stroke = '#000'; // Not yet implemented
+    export let stroke = '#08f'; // Not yet implemented
     // export let strokeWidth = 0;
   
     function hexToRgbPercent (hex) {
@@ -128,7 +127,21 @@
             r: (context, props) => {
               // const m = window.devicePixelRatio > 1 ? 4.0 : 2.0
               // If using an r-scale, set width here
-              return props.points.map(point => props.pointWidth);
+              return props.points.map(point => {
+                console.log(point);
+                if (typeof highlight_id !== 'undefined') {
+                  if (point.id == highlight_id) {
+                      return props.pointWidth * 4;
+                    } else {
+                      return props.pointWidth;
+                    }
+                  } else {
+                  return props.pointWidth; 
+                }
+              }
+              );
+              
+              // props.pointWidth * 4);
             },
             stroke_size: (context, props) => {
               // If using an r-scale, set width here
@@ -140,7 +153,7 @@
             // }
           },
           uniforms: {
-            fill_color: hexToRgbPercent('#3fddfc'), //OLD LAYERCAKE 
+            fill_color: hexToRgbPercent('#33ddff'), //OLD LAYERCAKE 
             // stroke_color: [0.6705882352941176, 0, 0.8392156862745098],
             stroke_color: hexToRgbPercent(stroke),
             // FYI: there is a helper method for grabbing
@@ -168,7 +181,7 @@
         });
   
         draw({
-          pointWidth: r * 2,
+          pointWidth: (r * 2) * 1.5,
           points: $data
         });
       }

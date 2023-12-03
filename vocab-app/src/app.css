@@ -82,11 +82,11 @@ vertical-align: middle;
   .circle {
     position: absolute;
     border-radius: 50%;
-    background-color: rgb(46, 157, 48);
+    background-color: #146f86;
     transform: translate(-50%, -50%);
     pointer-events: none;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
   }
   .tooltip {
     position: absolute;

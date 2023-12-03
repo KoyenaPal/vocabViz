@@ -63,9 +63,9 @@ import { error } from '@sveltejs/kit';
 		}
 	]
 
-	if (typeof(items[+params.slug - 1]) !== 'undefined')  {
-		return {'items': items, 'slug': items[+params.slug - 1], 'page_id': params.slug}
-	} else {
+	try {
+		return {items};
+	} catch (err) {
 		throw error(404, 'Not found');
 	}
 }
