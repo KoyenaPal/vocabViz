@@ -4,6 +4,55 @@
   import { Tabs, TabItem, Card } from 'flowbite-svelte';
   import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, TableSearch } from 'flowbite-svelte';
 
+  let items = [{			
+        id: 1,
+        entry: 'Star Wars',			
+        tokens: ['Star', 'Wars'],
+        confidence: 0.788,
+        vector: [.762,1.2],
+        examples: [
+            { doc: 341, example: 'The Star Wars franchise has grossed over 46 billion dollars...' },
+            { doc: 222, example: 'The Star Wars prequels are absolute fire!!!!' },
+            { doc: 13, example: 'I watched Star Wars for the first time and its mid'},
+            ],
+        close: [
+            { id: 15, distance: 341, entry: 'Indiana Jones' },
+            { id: 18, distance: 222, entry: 'Star Trek' },
+            ],
+        distant: [
+            { id: 145, distance: 341, entry: 'Banff National Park' },
+            { id: 21, distance: 222, entry: 'Cuban Sandwiches' },
+            ],
+        }, 
+	    {			
+        id: 2,
+        entry: 'Village Vanguard',			
+        tokens: ['Village', 'Vanguard'],
+        confidence: 0.64,
+        vector: [.8,-0.2],
+        examples: [
+            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
+            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
+            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
+        ],
+        close: ['Birdland', 'Blue Note'],
+        distant: ['McDonalds', 'Signal Hill Centre']
+    },
+    {			
+        id: 3,
+        entry: 'Indiana Jones',			
+        tokens: ['Indiana', 'Jones'],
+        confidence: 0.80,
+        vector: [.7,1.1],
+        examples: [
+            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
+            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
+            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
+        ],
+        close: ['Birdland', 'Blue Note'],
+        distant: ['McDonalds', 'Signal Hill Centre']
+    }]
+
   // search bar stuff 
   let exampleSearchTerm = '';
   $: exampleItems = data.examples
@@ -25,18 +74,18 @@
   import AxisY from '../../_components/AxisY.svelte';
   import QuadTree from '../../_components/QuadTree.html.svelte';
 
-  const xKey = 'year';
-  const yKey = 'value';
+  const xKey = 'pca_x';
+  const yKey = 'pca_y';
 
+  // TODO first plot the actual data on the home page, then come back here and highlight points.
+  const highlight_id = 1;
   const r = 3;
   const padding = 6;
 
-  let plotData = [{'year':2001, 'value':10}, {'year':2002, 'value':20}, {'year':2003, 'value':30}, {'year':2004, 'value':100}];
-
-  plotData.forEach(d => {
-    d[yKey] = +d[yKey];
+  let plotData = [];
+  items.forEach(i => {
+    plotData.push({'entry': i.entry, 'pca_x': i.vector[0], 'pca_y': i.vector[1]})
   });
-  
 </script>
 
 <div class="pt-5 pl-5 pagetitle">
@@ -73,6 +122,7 @@
     <WebGL>
       <ScatterWebGL
         {r}
+        {highlight_id}
       />
     </WebGL>
 
@@ -81,11 +131,16 @@
         let:x
         let:y
         let:visible
+        let:label
       >
         <div
           class="circle"
           style="top:{y}px;left:{x}px;display: { visible ? 'block' : 'none' };"
-        >todo</div>
+        ></div>
+        <span
+          class="tooltip"
+          style="top:{y}px;left:{x}px;display: { visible ? 'block' : 'none' };"
+        >{label}</span> 
       </QuadTree>
     </Html>
   </LayerCake>
@@ -98,7 +153,7 @@
 
 
 <!-- https://tailwindcss.com/docs/padding -->
-<div class="pt-5 pl-5">
+<div class="vocab-tabs pt-5 pl-5">
   <Tabs style="pill">
     <TabItem open>
       <span slot="title">Examples</span>
@@ -130,7 +185,7 @@
               <TableBodyRow>
                 <TableBodyCell>{item.id}</TableBodyCell>
                 <TableBodyCell>{item.distance}</TableBodyCell>
-                <TableBodyCell>{item.entry}</TableBodyCell>
+                <TableBodyCell><a href="/vocab/{item.id}"><u>{item.entry}</u></a></TableBodyCell>
               </TableBodyRow>
             {/each}
           </TableBody>
@@ -149,7 +204,7 @@
             <TableBodyRow>
               <TableBodyCell>{item.id}</TableBodyCell>
               <TableBodyCell>{item.distance}</TableBodyCell>
-              <TableBodyCell>{item.entry}</TableBodyCell>
+              <TableBodyCell><a href="/vocab/{item.id}"><u>{item.entry}</u></a></TableBodyCell>
             </TableBodyRow>
           {/each}
         </TableBody>

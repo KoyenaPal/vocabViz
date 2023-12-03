@@ -10,10 +10,26 @@
   
     const { data, xGet, yGet, width, height } = getContext('LayerCake');
   
+    let label = "";
     let visible = false;
     let found = {};
     let e = {};
-  
+
+    // let recoverLabels = [];
+    // $data.forEach(i => {
+    //   recoverLabels.push({'entry': i.entry, 'pca_x': i.pca_x, 'pca_y': i.pca_y})
+    // });
+    // console.log(recoverLabels)
+
+    function getLabel (item) {
+      for(var i = 0; i<$data.length; i++) {
+        if(item.id == $data[i].id) {
+            return item.entry;
+        }
+      }
+      return "undefined"
+    }
+
     /** @type {String} [x='x'] – The dimension to search across when moving the mouse left and right. */
     export let x = 'x';
   
@@ -37,6 +53,7 @@
   
       found = finder.find(evt[xLayerKey], evt[yLayerKey], searchRadius) || {};
       visible = Object.keys(found).length > 0;
+      label = getLabel(found);
     }
   
     $: finder = quadtree()
@@ -68,4 +85,5 @@
     {found}
     {visible}
     {e}
+    {label}
   ></slot>

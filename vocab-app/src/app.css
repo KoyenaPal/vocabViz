@@ -41,6 +41,9 @@ vertical-align: middle;
     padding-bottom: 20px;
 }
 
+.vocab-tabs {
+    margin-bottom: 30%;
+}
 
 /* stuff for home page */
 .home-search {
@@ -79,9 +82,18 @@ vertical-align: middle;
   .circle {
     position: absolute;
     border-radius: 50%;
-    background-color: rgba(171,0, 214);
+    background-color: rgb(46, 157, 48);
     transform: translate(-50%, -50%);
     pointer-events: none;
     width: 10px;
     height: 10px;
+  }
+  .tooltip {
+    position: absolute;
+    border-radius: 0%;
+    border: 1px solid black;
+    /* background-color: rgba(171,0, 214); */
+    transform: translate(10%, -100%);
+    pointer-events: none;
+    padding: 0.2em;
   }

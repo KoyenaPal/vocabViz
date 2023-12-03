@@ -31,12 +31,18 @@ import { error } from '@sveltejs/kit';
 			confidence: 0.64,
 			vector: [.8,-0.2],
 			examples: [
-				'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.',
-				'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard', 
-				'Bill Evans live at the Village Vanguard is THE greatest album of all time.', 
+				{doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
+            	{doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
+            	{doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
 			],
-			close: ['Birdland', 'Blue Note'],
-			distant: ['McDonalds', 'Signal Hill Centre']
+			close: [
+				{ id: 15, distance: 10, entry: 'Birdland' },
+				{ id: 16, distance: 8, entry: 'Blue Note'} 
+			],
+			distant: [
+				{ id: 17, distance: 341, entry: 'McDonalds' },
+				{ id: 18, distance: 672, entry: 'Signal Hill Centre' },
+			]
 		};	
 	}
 	throw error(404, 'Not found');

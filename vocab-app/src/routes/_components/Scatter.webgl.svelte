@@ -7,12 +7,17 @@
     import { getContext } from 'svelte';
   
     const { data, xGet, yGet, width, height } = getContext('LayerCake');
+    
+    // TODO HIGHLIGHT THE RELEVNT POINT HERE 
+    export let highlight_id = undefined; 
+    console.log("scatter has", highlight_id);
   
     /** @type {Number} [r=5] - The circle's radius. */
     export let r = 5;
   
     /** @type {String} [fill='#0cf'] - The circle's fill color. */
     export let fill = '#0cf';
+    export let highlight_color = '#f02'
   
     export let stroke = '#000'; // Not yet implemented
     // export let strokeWidth = 0;
@@ -128,10 +133,14 @@
             stroke_size: (context, props) => {
               // If using an r-scale, set width here
               return props.points.map(point => 0);
-            }
+            },
+            // fill_color: (context, props) => {
+            //   // TODO map points everything t blue except highlight point 
+            //   return props.points.map(point => '#000');
+            // }
           },
           uniforms: {
-            fill_color: hexToRgbPercent(fill),
+            fill_color: hexToRgbPercent('#3fddfc'), //OLD LAYERCAKE 
             // stroke_color: [0.6705882352941176, 0, 0.8392156862745098],
             stroke_color: hexToRgbPercent(stroke),
             // FYI: there is a helper method for grabbing

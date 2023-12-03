@@ -37,6 +37,20 @@
         ],
         close: ['Birdland', 'Blue Note'],
         distant: ['McDonalds', 'Signal Hill Centre']
+    },
+    {			
+        id: 3,
+        entry: 'Indiana Jones',			
+        tokens: ['Indiana', 'Jones'],
+        confidence: 0.80,
+        vector: [.7,1.1],
+        examples: [
+            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
+            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
+            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
+        ],
+        close: ['Birdland', 'Blue Note'],
+        distant: ['McDonalds', 'Signal Hill Centre']
     }]
   $: filteredItems = items.filter((item) => item.entry.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
 
@@ -49,15 +63,15 @@
   import AxisY from './_components/AxisY.svelte';
   import QuadTree from './_components/QuadTree.html.svelte';
 
-  const xKey = 'year';
-  const yKey = 'value';
+  const xKey = 'pca_x';
+  const yKey = 'pca_y';
 
   const r = 3;
   const padding = 6;
 
-  let data = [{'year':2001, 'value':10}, {'year':2002, 'value':20}, {'year':2003, 'value':30}, {'year':2004, 'value':100}]
-  data.forEach(d => {
-    d[yKey] = +d[yKey];
+  let plotData = []
+  items.forEach(i => {
+    plotData.push({'entry': i.entry, 'pca_x': i.vector[0], 'pca_y': i.vector[1]})
   });
 
 </script>
@@ -83,36 +97,30 @@
 </div>
 </center>
 
+
+
 <div class="parent">
-  <!-- TODO for loop that randomly selects elements and displays four  -->
-  <div class="child"><Card href="/vocab/{1}">
-    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">placeholder</h5>
-    <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">See Vocabulary Page</p>
+  <center><i><h2>Examples of Llama-2 Concepts</h2></i></center>
+  {#each items.slice(0,4) as item}
+  <div class="child"><Card href="/vocab/{item.id}">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{item.entry}</h5>
+    <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Confidence: {item.confidence}</p>
   </Card></div>
-  <div class="child"><Card href="/cards">
-    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">placeholder</h5>
-    <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">See Vocabulary Page</p>
-  </Card></div>
-  <div class="child"><Card href="/cards">
-    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">placeholder</h5>
-    <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">See Vocabulary Page</p>
-  </Card></div>
-  <div class="child"><Card href="/cards">
-    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">placeholder</h5>
-    <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">See Vocabulary Page</p>
-  </Card></div>
+  {/each}
 </div>
 
-<!-- TODO: zooming in automatically for vocab page, and showing term when you hover. -->
+<!-- TODO: zooming in automatically for vocab page. -->
+<!-- TODO tooltip https://layercake.graphics/example/MultiLine -->
 <center>
+<h2><i>Explore Llama-2-7b's Vocabulary Space</i></h2>
 <div class="chart-container">
   <LayerCake
-    padding={{ top: 0, right: 5, bottom: 20, left: 25 }}
+    padding={{ top: 25, right: 25, bottom: 20, left: 25 }}
     x={xKey}
     y={yKey}
     xPadding={[padding, padding]}
     yPadding={[padding, padding]}
-    data={data}
+    data={plotData}
   >
     <Svg>
       <AxisX ticks={4}/>
@@ -132,11 +140,17 @@
         let:x
         let:y
         let:visible
+        let:e
+        let:label
       >
         <div
           class="circle"
           style="top:{y}px;left:{x}px;display: { visible ? 'block' : 'none' };"
         ></div>
+        <span
+          class="tooltip"
+          style="top:{y}px;left:{x}px;display: { visible ? 'block' : 'none' };"
+        >{label}</span> 
       </QuadTree>
     </Html>
   </LayerCake>
@@ -144,8 +158,6 @@
 </center>
 
 <div class="home-search">
-  <center><h2>Explore Llama-2-7b's Vocabulary Space</h2></center>
-  
   <TableSearch class="search-bar" placeholder="Search for a concept..." hoverable={true} bind:inputValue={searchTerm}>
     <TableHead>
       <TableHeadCell>ID</TableHeadCell>
@@ -158,7 +170,7 @@
       {#each filteredItems as item}
         <TableBodyRow>
           <TableBodyCell>{item.id}</TableBodyCell>
-          <TableBodyCell>{item.entry}</TableBodyCell>
+          <TableBodyCell><a href="/vocab/{item.id}"><u>{item.entry}</u></a></TableBodyCell>
           <TableBodyCell>{item.confidence}</TableBodyCell>
           <TableBodyCell>{item.examples[0].example}</TableBodyCell>
         </TableBodyRow>
