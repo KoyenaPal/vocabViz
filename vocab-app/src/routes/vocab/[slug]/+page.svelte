@@ -53,8 +53,7 @@
         distant: ['McDonalds', 'Signal Hill Centre']
     }]
 
-  // search bar stuff 
-  console.log(data.slug)
+  // search bar stuff
   let exampleSearchTerm = '';
   $: exampleItems = data.slug.examples
   $: filteredExamples = exampleItems.filter((item) => item.example.toLowerCase().indexOf(exampleSearchTerm.toLowerCase()) !== -1);
