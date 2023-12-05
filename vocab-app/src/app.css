@@ -92,7 +92,7 @@ vertical-align: middle;
     position: absolute;
     border-radius: 0%;
     border: 1px solid black;
-    /* background-color: rgba(171,0, 214); */
+    background-color: white;
     transform: translate(10%, -100%);
     pointer-events: none;
     padding: 0.2em;

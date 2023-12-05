@@ -126,7 +126,7 @@
           <TableBodyCell>{item.id}</TableBodyCell>
           <TableBodyCell><a href="/vocab/{item.id}"><u>{item.entry}</u></a></TableBodyCell>
           <TableBodyCell>{item.confidence}</TableBodyCell>
-          <TableBodyCell>{item.examples[0].example}</TableBodyCell>
+          <TableBodyCell>{item.examples[0].sentence}</TableBodyCell>
         </TableBodyRow>
       {/each}
     </TableBody>

@@ -18,7 +18,7 @@
     /** @type {String} [fill='#0cf'] - The circle's fill color. */
     export let fill = '#08f';
   
-    export let stroke = '#08f'; // Not yet implemented
+    export let stroke = '#fc1703'; // Not yet implemented
     // export let strokeWidth = 0;
   
     function hexToRgbPercent (hex) {
@@ -145,7 +145,17 @@
             },
             stroke_size: (context, props) => {
               // If using an r-scale, set width here
-              return props.points.map(point => 0);
+              return props.points.map(point => {
+                if (typeof highlight_id !== 'undefined') {
+                  if (point.id == highlight_id) {
+                      return 0.25;
+                    } else {
+                      return 0;
+                    }
+                  } else {
+                  return 0; 
+                }
+              });
             },
             // fill_color: (context, props) => {
             //   // TODO map points everything t blue except highlight point 

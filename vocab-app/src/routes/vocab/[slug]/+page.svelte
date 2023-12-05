@@ -5,11 +5,12 @@
   import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, TableSearch } from 'flowbite-svelte';
 
   let items = data.items;
+  console.log(data.slug);
 
   // search bar stuff
   let exampleSearchTerm = '';
   $: exampleItems = data.slug.examples
-  $: filteredExamples = exampleItems.filter((item) => item.example.toLowerCase().indexOf(exampleSearchTerm.toLowerCase()) !== -1);
+  $: filteredExamples = exampleItems.filter((item) => item.sentence.toLowerCase().indexOf(exampleSearchTerm.toLowerCase()) !== -1);
 
   let closeSearchTerm = '';
   $: closeItems = data.slug.close
@@ -119,7 +120,7 @@
           {#each filteredExamples as item}
             <TableBodyRow>
               <TableBodyCell>{item.doc}</TableBodyCell>
-              <TableBodyCell>{item.example}</TableBodyCell>
+              <TableBodyCell>{item.sentence}</TableBodyCell>
             </TableBodyRow>
           {/each}
         </TableBody>
@@ -138,7 +139,7 @@
               <TableBodyRow>
                 <TableBodyCell>{item.id}</TableBodyCell>
                 <TableBodyCell>{item.distance}</TableBodyCell>
-                <TableBodyCell><a href="/vocab/{item.id}"><u>{item.entry}</u></a></TableBodyCell>
+                <TableBodyCell><a href="/vocab/{item.id}" data-sveltekit-reload><u>{item.entry}</u></a></TableBodyCell>
               </TableBodyRow>
             {/each}
           </TableBody>
@@ -157,7 +158,7 @@
             <TableBodyRow>
               <TableBodyCell>{item.id}</TableBodyCell>
               <TableBodyCell>{item.distance}</TableBodyCell>
-              <TableBodyCell><a href="/vocab/{item.id}"><u>{item.entry}</u></a></TableBodyCell>
+              <TableBodyCell><a href="/vocab/{item.id}" data-sveltekit-reload><u>{item.entry}</u></a></TableBodyCell>
             </TableBodyRow>
           {/each}
         </TableBody>
