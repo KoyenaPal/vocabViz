@@ -30,24 +30,20 @@
 
 </script>
 
+<div class="help-button"><a href="/info"><img src="/help.png"></a></div>
+<div class="home-button"><a href="/"><img src="/home.png"></a></div>
+
+
 
 <center>
-<div class="pt-5 pl-10 pb-10 pr-10">
-  <h1>What Concepts Does Llama 2 Know?</h1>
-  <p class="home-text">Large Language Models (LLMs) like Llama 2 seem to store a lot of information about the world, 
-    but nobody knows exactly <i>what</i> information they store, and <i>how</i> that information is represented. One problem
-    is that when LLMs process input text, everything is represented as sequences of independent <b>tokens.</b> This means that,
-
-    
-    What concepts do language models "know?" 
-    Many important concepts are processed by large language models (LLMs) 
-    as sequences of disconnected words. How can we know which sequences of 
-    words a model might see as one concept (``Star'' and ``Wars'') versus words 
-    a model might view as unrelated (e.g. ``Sun'' and ``Battle'')? In parallel 
-    with our work on identifying these phrases, we designed this visualization tool.</p>
-  
-
-
+<div class="pt-5 pl-20 pb-10 pr-20">
+  <h1>What Concepts Does Llama-2 Know?</h1>
+  <p class="home-text"> Large Language Models (LLMs) can implicitly store 
+    a lot of information about the world. Llama-2, Meta AI's latest open-source model, is able to correctly
+    complete sentences like <i>"Thelonious Monk plays the ___"</i> (piano), presumably due to having seen 
+    this information somewhere before during training. <b>But how is this knowledge organized?</b> Below, we display {plotData.length} 
+    concept representations that Llama-2 is able to correctly answer questions about, organized based on ongoing research
+    into how LLMs represent multi-token concepts (things that take several words to express). </p>
 </div>
 </center>
 
@@ -63,8 +59,7 @@
   {/each}
 </div>
 
-<!-- TODO: zooming in automatically for vocab page. -->
-<!-- TODO tooltip https://layercake.graphics/example/MultiLine -->
+<!-- This may be better to use than layercake https://github.com/flekschas/regl-scatterplot -->
 <center>
 <h2><i>Explore Llama-2-7b's Vocabulary Space</i></h2>
 <div class="chart-container">
@@ -124,7 +119,7 @@
       {#each filteredItems as item}
         <TableBodyRow>
           <TableBodyCell>{item.id}</TableBodyCell>
-          <TableBodyCell><a href="/vocab/{item.id}"><u>{item.entry}</u></a></TableBodyCell>
+          <TableBodyCell><a href="/vocab/{item.id}" class="highlighted-link">{item.entry}</a></TableBodyCell>
           <TableBodyCell>{item.confidence}</TableBodyCell>
           <TableBodyCell>{item.examples[0].sentence}</TableBodyCell>
         </TableBodyRow>

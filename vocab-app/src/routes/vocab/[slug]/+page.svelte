@@ -42,6 +42,9 @@
   });
 </script>
 
+<div class="help-button"><a href="/info"><img src="/help.png"></a></div>
+<div class="home-button"><a href="/"><img src="/home.png"></a></div>
+
 <div class="pt-5 pl-5 pagetitle">
   <center><h1><a href="/">Llama-2-7b Vocabulary</a></h1></center>
   <!-- <center><h1>{data.slug.entry}</h1></center>
@@ -54,8 +57,14 @@
 <div class="childl">
   <!-- <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{data.slug.entry}</h5>
   <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight"><i>Confidence: {data.slug.confidence}</i></p> -->
-  <a href="/vocab/{data.slug.id}"><h1>{data.slug.entry}</h1></a> <h2>Confidence: {data.slug.confidence}</h2>
-  <p class="home-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta ullamcorper mauris, ut vulputate risus facilisis quis. Proin id blandit odio. Nunc semper fringilla faucibus. Nulla nibh arcu, malesuada id lobortis ut, bibendum eget diam. Donec id magna sem. Nulla vestibulum ipsum sit amet ante aliquam, ac vehicula eros lacinia. Curabitur euismod scelerisque ligula nec scelerisque. Nulla malesuada mattis pellentesque. Sed fringilla ipsum eget tortor viverra porta. Nullam malesuada orci ut justo rutrum mollis. Mauris vel auctor massa, id malesuada urna. Integer felis elit, vestibulum condimentum nisl sit amet, euismod commodo augue.</p>
+  <a href="/vocab/{data.slug.id}"><h1>{data.slug.entry}</h1></a> <h2>Confidence: {data.slug.confidence}</h2> 
+  <h3>Location: [{Math.round(data.slug.vector[0] * 1000)/1000}, {Math.round(data.slug.vector[1]*1000)/1000}]</h3> 
+  <p class="home-text">Explore <b>examples</b> of this phrase in context and search through a list of <b>closely-related</b> and <b>distant</b> entries 
+  in the three tabs below. Click on the linked related entries to go to their respective pages and compare locations on the plot. 
+  <i>{data.slug.entry}</i> appears in the right-hand plot highlighted in red. 
+  <br><br>
+  <i><h3><a href="/info" class="highlighted-link">Where does this plot come from?</a></h3></i>
+   </p>
 </div>
 <div class="small-chart-container">
   <LayerCake
@@ -139,7 +148,7 @@
               <TableBodyRow>
                 <TableBodyCell>{item.id}</TableBodyCell>
                 <TableBodyCell>{item.distance}</TableBodyCell>
-                <TableBodyCell><a href="/vocab/{item.id}" data-sveltekit-reload><u>{item.entry}</u></a></TableBodyCell>
+                <TableBodyCell><a href="/vocab/{item.id}" class="highlighted-link" data-sveltekit-reload>{item.entry}</a></TableBodyCell>
               </TableBodyRow>
             {/each}
           </TableBody>
@@ -158,7 +167,7 @@
             <TableBodyRow>
               <TableBodyCell>{item.id}</TableBodyCell>
               <TableBodyCell>{item.distance}</TableBodyCell>
-              <TableBodyCell><a href="/vocab/{item.id}" data-sveltekit-reload><u>{item.entry}</u></a></TableBodyCell>
+              <TableBodyCell><a href="/vocab/{item.id}" class="highlighted-link" data-sveltekit-reload>{item.entry}</a></TableBodyCell>
             </TableBodyRow>
           {/each}
         </TableBody>

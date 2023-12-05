@@ -8,6 +8,32 @@ h2 {
     font-size: xx-large;
 }
 
+h3 {
+  font-weight: 400;
+  font-size: x-large;
+}
+
+.highlighted-link {
+  /* color: #6ED9FB; */
+  text-decoration: underline dotted;
+}
+
+.help-button {
+  position: absolute;
+  top: 20px;
+  right: 75px;
+  width: 40px;
+  height: 40px;
+}
+
+.home-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+}
+
 .parent {
     padding: 1rem 1rem;
     text-align: center;
@@ -64,6 +90,7 @@ vertical-align: middle;
     font-size: larger;
     width: 80%;
     margin-bottom: -2%;
+    margin-top: 2%;
 }
 
 /* stuff from LayerCake scatterplot */

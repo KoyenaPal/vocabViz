@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 
 /** @type {import('./$types').PageLoad} */export async function load({ fetch, params }) {	
-	const res = await fetch("/medium.json");
+	const res = await fetch("/small.json");
 	const newItems = await res.json();
 	let items = newItems;
 
