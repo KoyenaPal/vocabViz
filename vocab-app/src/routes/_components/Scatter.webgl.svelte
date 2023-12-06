@@ -92,6 +92,7 @@
           precision mediump float;
           attribute vec2 position;
           attribute float r;
+          attribute float z;
           attribute float stroke_size;
   
           varying float s_s;
@@ -114,7 +115,7 @@
           void main () {
             s_s = stroke_size;
             gl_PointSize = r;
-            gl_Position = vec4(normalizeCoords(position), 0.0, 1.0);
+            gl_Position = vec4(normalizeCoords(position), z, 1.0);
           }`,
           attributes: {
             // There will be a position value for each point
@@ -124,14 +125,26 @@
                 return [$xGet(point), $yGet(point)];
               });
             },
+            z: (context, props) => {
+              return props.points.map(point => {
+                if (typeof highlight_id !== 'undefined') {
+                  if (point.id == highlight_id) {
+                      return -0.99;
+                    } else {
+                      return 0.0;
+                    }
+                  } else {
+                  return 0.0; 
+                }
+              });
+            },
             r: (context, props) => {
               // const m = window.devicePixelRatio > 1 ? 4.0 : 2.0
               // If using an r-scale, set width here
               return props.points.map(point => {
-                console.log(point);
                 if (typeof highlight_id !== 'undefined') {
                   if (point.id == highlight_id) {
-                      return props.pointWidth * 4;
+                      return props.pointWidth * 3;
                     } else {
                       return props.pointWidth;
                     }
@@ -187,7 +200,9 @@
               dstAlpha: 'one minus src alpha'
             }
           },
-          depth: { enable: false }
+          depth: {
+            enable: true
+          },
         });
   
         draw({
