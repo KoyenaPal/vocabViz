@@ -1,13 +1,15 @@
-<script>  
+<script lang="ts">  
   /** @type {import('./$types').PageData} */
   export let data;
 
   // search for pages functionality
   import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, TableSearch, Card } from 'flowbite-svelte';
+  import {onMount} from 'svelte';
+  import papa from 'papaparse';
   let searchTerm = '';
+
   let items = data.items;
   $: filteredItems = items.filter((item) => item.entry.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
-
 
   // https://layercake.graphics/example/ScatterWebgl
   import { LayerCake, Svg, WebGL, Html } from 'layercake';
@@ -27,12 +29,23 @@
   items.forEach(i => {
     plotData.push({'entry': i.entry, 'pca_x': i.vector[0], 'pca_y': i.vector[1]})
   });
+  // function handleChange(event: any) {
+  //     let files = event.target.files;
+  //     console.log(files)
+  //     for (let f of files) {
+  //         papa.parse(f, {
+  //             header: true,
+  //             complete: function (results: any) {
+  //                 console.log(results);
+  //             }
+  //         });
+  //     }
+  // }
 
 </script>
 
 <div class="help-button"><a href="/info"><img src="/help.png"></a></div>
 <div class="home-button"><a href="/"><img src="/home.png"></a></div>
-
 
 
 <center>
