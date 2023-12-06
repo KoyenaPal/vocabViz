@@ -19,7 +19,7 @@
     <p class="home-text">
         For CounterFact prompts that Llama-2 was able to answer correctly, we take the hidden representations of the <i>last</i> token for each
         entity and perform dimensionality reduction to get a 2D vector describing that hidden state's similarity to other concept hidden states, 
-        resulting in the scatterplot shown on this website. Currently, the data being displayed is a tSNE plot of representations at the first layer of Llama-2. 
+        resulting in the scatterplot shown on this website. Currently, the data being displayed is a tSNE plot of representations at the <i>fifth</i> layer of Llama-2. 
         Confidence scores are currently placeholders. Euclidean distance measures how far any given point is to another. 
       </p>
     </div>

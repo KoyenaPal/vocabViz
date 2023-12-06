@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 
 /** @type {import('./$types').PageLoad} */export async function load({ fetch, params }) {	
-	const res = await fetch("/tsne_correct_only_layer_0.json");
+	const res = await fetch("/tsne_correct_only_layer_4.json");
 	const newItems = await res.json();
 	let items = newItems;
 
