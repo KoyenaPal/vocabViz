@@ -8,6 +8,32 @@ h2 {
     font-size: xx-large;
 }
 
+h3 {
+  font-weight: 400;
+  font-size: x-large;
+}
+
+.highlighted-link {
+  /* color: #6ED9FB; */
+  text-decoration: underline dotted;
+}
+
+.help-button {
+  position: absolute;
+  top: 20px;
+  right: 75px;
+  width: 40px;
+  height: 40px;
+}
+
+.home-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+}
+
 .parent {
     padding: 1rem 1rem;
     text-align: center;
@@ -64,6 +90,7 @@ vertical-align: middle;
     font-size: larger;
     width: 80%;
     margin-bottom: -2%;
+    margin-top: 2%;
 }
 
 /* stuff from LayerCake scatterplot */
@@ -82,17 +109,17 @@ vertical-align: middle;
   .circle {
     position: absolute;
     border-radius: 50%;
-    background-color: rgb(46, 157, 48);
+    background-color: #146f86;
     transform: translate(-50%, -50%);
     pointer-events: none;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
   }
   .tooltip {
     position: absolute;
     border-radius: 0%;
     border: 1px solid black;
-    /* background-color: rgba(171,0, 214); */
+    background-color: white;
     transform: translate(10%, -100%);
     pointer-events: none;
     padding: 0.2em;

@@ -16,10 +16,9 @@
     export let r = 5;
   
     /** @type {String} [fill='#0cf'] - The circle's fill color. */
-    export let fill = '#0cf';
-    export let highlight_color = '#f02'
+    export let fill = '#08f';
   
-    export let stroke = '#000'; // Not yet implemented
+    export let stroke = '#fc1703'; // Not yet implemented
     // export let strokeWidth = 0;
   
     function hexToRgbPercent (hex) {
@@ -93,6 +92,7 @@
           precision mediump float;
           attribute vec2 position;
           attribute float r;
+          attribute float z;
           attribute float stroke_size;
   
           varying float s_s;
@@ -115,7 +115,7 @@
           void main () {
             s_s = stroke_size;
             gl_PointSize = r;
-            gl_Position = vec4(normalizeCoords(position), 0.0, 1.0);
+            gl_Position = vec4(normalizeCoords(position), z, 1.0);
           }`,
           attributes: {
             // There will be a position value for each point
@@ -125,14 +125,50 @@
                 return [$xGet(point), $yGet(point)];
               });
             },
+            z: (context, props) => {
+              return props.points.map(point => {
+                if (typeof highlight_id !== 'undefined') {
+                  if (point.id == highlight_id) {
+                      return -0.99;
+                    } else {
+                      return 0.0;
+                    }
+                  } else {
+                  return 0.0; 
+                }
+              });
+            },
             r: (context, props) => {
               // const m = window.devicePixelRatio > 1 ? 4.0 : 2.0
               // If using an r-scale, set width here
-              return props.points.map(point => props.pointWidth);
+              return props.points.map(point => {
+                if (typeof highlight_id !== 'undefined') {
+                  if (point.id == highlight_id) {
+                      return props.pointWidth * 3;
+                    } else {
+                      return props.pointWidth;
+                    }
+                  } else {
+                  return props.pointWidth; 
+                }
+              }
+              );
+              
+              // props.pointWidth * 4);
             },
             stroke_size: (context, props) => {
               // If using an r-scale, set width here
-              return props.points.map(point => 0);
+              return props.points.map(point => {
+                if (typeof highlight_id !== 'undefined') {
+                  if (point.id == highlight_id) {
+                      return 0.25;
+                    } else {
+                      return 0;
+                    }
+                  } else {
+                  return 0; 
+                }
+              });
             },
             // fill_color: (context, props) => {
             //   // TODO map points everything t blue except highlight point 
@@ -140,7 +176,7 @@
             // }
           },
           uniforms: {
-            fill_color: hexToRgbPercent('#3fddfc'), //OLD LAYERCAKE 
+            fill_color: hexToRgbPercent('#33ddff'), //OLD LAYERCAKE 
             // stroke_color: [0.6705882352941176, 0, 0.8392156862745098],
             stroke_color: hexToRgbPercent(stroke),
             // FYI: there is a helper method for grabbing
@@ -164,11 +200,13 @@
               dstAlpha: 'one minus src alpha'
             }
           },
-          depth: { enable: false }
+          depth: {
+            enable: true
+          },
         });
   
         draw({
-          pointWidth: r * 2,
+          pointWidth: (r * 2) * 1.5,
           points: $data
         });
       }

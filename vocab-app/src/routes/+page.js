@@ -1,30 +1,12 @@
-import Papa from 'papaparse'
+import { error } from '@sveltejs/kit';
 
-export const load = ({ fetch }) => {
-  const fetchFlights = async () => {
-    const res = await fetch('https://vda-lab.gitlab.io/datavis-technologies/assets/flights_part.csv', {
-      headers: {
-        'Content-Type': 'text/csv'
-    }})
-    let csv_data = await res.text()
-    let csv_parsed = Papa.parse(csv_data, {header: true})
+/** @type {import('./$types').PageLoad} */export async function load({ fetch, params }) {	
+    const res = await fetch("/tsne_correct_only_layer_4.json");
+	const items = await res.json();
 
-    return csv_parsed.data
-  }
-
-  return {
-    flights: fetchFlights()
-  }
+	try {
+		return {items};
+	} catch (err) {
+		throw error(404, 'Not found');
+	}
 }
-
-// export const load = ({ fetch }) => {
-//     const fetchFlowers = async () => {
-//       const res = await fetch('../../data/example.json')
-//       const data = await res.json()
-//       return data
-//     }
-  
-//     return {
-//       flowers: fetchFlowers()
-//     }
-//   }

@@ -4,66 +4,20 @@
   import { Tabs, TabItem, Card } from 'flowbite-svelte';
   import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, TableSearch } from 'flowbite-svelte';
 
-  let items = [{			
-        id: 1,
-        entry: 'Star Wars',			
-        tokens: ['Star', 'Wars'],
-        confidence: 0.788,
-        vector: [.762,1.2],
-        examples: [
-            { doc: 341, example: 'The Star Wars franchise has grossed over 46 billion dollars...' },
-            { doc: 222, example: 'The Star Wars prequels are absolute fire!!!!' },
-            { doc: 13, example: 'I watched Star Wars for the first time and its mid'},
-            ],
-        close: [
-            { id: 15, distance: 341, entry: 'Indiana Jones' },
-            { id: 18, distance: 222, entry: 'Star Trek' },
-            ],
-        distant: [
-            { id: 145, distance: 341, entry: 'Banff National Park' },
-            { id: 21, distance: 222, entry: 'Cuban Sandwiches' },
-            ],
-        }, 
-	    {			
-        id: 2,
-        entry: 'Village Vanguard',			
-        tokens: ['Village', 'Vanguard'],
-        confidence: 0.64,
-        vector: [.8,-0.2],
-        examples: [
-            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
-            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
-            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
-        ],
-        close: ['Birdland', 'Blue Note'],
-        distant: ['McDonalds', 'Signal Hill Centre']
-    },
-    {			
-        id: 3,
-        entry: 'Indiana Jones',			
-        tokens: ['Indiana', 'Jones'],
-        confidence: 0.80,
-        vector: [.7,1.1],
-        examples: [
-            {doc: 309, example: 'The Village Vanguard is a jazz club at Seventh Avenue South in Greenwich Village, New York City.'},
-            {doc: 213, example: 'Coltranes version of Softly at the Village Vanguard is my fav recording of my fav standard'},
-            {doc: 66, example: 'Bill Evans live at the Village Vanguard is THE greatest album of all time.'}
-        ],
-        close: ['Birdland', 'Blue Note'],
-        distant: ['McDonalds', 'Signal Hill Centre']
-    }]
+  let items = data.items;
+  console.log(data.slug);
 
-  // search bar stuff 
+  // search bar stuff
   let exampleSearchTerm = '';
-  $: exampleItems = data.examples
-  $: filteredExamples = exampleItems.filter((item) => item.example.toLowerCase().indexOf(exampleSearchTerm.toLowerCase()) !== -1);
+  $: exampleItems = data.slug.examples
+  $: filteredExamples = exampleItems.filter((item) => item.sentence.toLowerCase().indexOf(exampleSearchTerm.toLowerCase()) !== -1);
 
   let closeSearchTerm = '';
-  $: closeItems = data.close
+  $: closeItems = data.slug.close
   $: filteredClose = closeItems.filter((item) => item.entry.toLowerCase().indexOf(closeSearchTerm.toLowerCase()) !== -1);
 
   let distantSearchTerm = '';
-  $: distantItems = data.distant
+  $: distantItems = data.slug.distant
   $: filteredDistant = distantItems.filter((item) => item.entry.toLowerCase().indexOf(distantSearchTerm.toLowerCase()) !== -1);
 
   // https://layercake.graphics/example/ScatterWebgl
@@ -78,30 +32,39 @@
   const yKey = 'pca_y';
 
   // TODO first plot the actual data on the home page, then come back here and highlight points.
-  const highlight_id = 1;
+  const highlight_id = data.page_id;
   const r = 3;
   const padding = 6;
 
   let plotData = [];
   items.forEach(i => {
-    plotData.push({'entry': i.entry, 'pca_x': i.vector[0], 'pca_y': i.vector[1]})
+    plotData.push({'id': i.id, 'entry': i.entry, 'pca_x': i.vector[0], 'pca_y': i.vector[1]})
   });
 </script>
 
+<div class="help-button"><a href="/info"><img src="/help.png"></a></div>
+<div class="home-button"><a href="/"><img src="/home.png"></a></div>
+
 <div class="pt-5 pl-5 pagetitle">
   <center><h1><a href="/">Llama-2-7b Vocabulary</a></h1></center>
-  <!-- <center><h1>{data.entry}</h1></center>
-  <center><p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Confidence: {data.confidence}</p></center> -->
+  <!-- <center><h1>{data.slug.entry}</h1></center>
+  <center><p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Confidence: {data.slug.confidence}</p></center> -->
 </div>
 
 <br>
 
 <div class="parentl">
 <div class="childl">
-  <!-- <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{data.entry}</h5>
-  <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight"><i>Confidence: {data.confidence}</i></p> -->
-  <a href="/vocab/{data.id}"><h1>{data.entry}</h1></a> <h2>Confidence: {data.confidence}</h2>
-  <p class="home-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta ullamcorper mauris, ut vulputate risus facilisis quis. Proin id blandit odio. Nunc semper fringilla faucibus. Nulla nibh arcu, malesuada id lobortis ut, bibendum eget diam. Donec id magna sem. Nulla vestibulum ipsum sit amet ante aliquam, ac vehicula eros lacinia. Curabitur euismod scelerisque ligula nec scelerisque. Nulla malesuada mattis pellentesque. Sed fringilla ipsum eget tortor viverra porta. Nullam malesuada orci ut justo rutrum mollis. Mauris vel auctor massa, id malesuada urna. Integer felis elit, vestibulum condimentum nisl sit amet, euismod commodo augue.</p>
+  <!-- <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{data.slug.entry}</h5>
+  <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight"><i>Confidence: {data.slug.confidence}</i></p> -->
+  <a href="/vocab/{data.slug.id}"><h1>{data.slug.entry}</h1></a> <h2>Confidence: {data.slug.confidence}</h2> 
+  <h3>Location: [{Math.round(data.slug.vector[0] * 1000)/1000}, {Math.round(data.slug.vector[1]*1000)/1000}]</h3> 
+  <p class="home-text">Explore <b>examples</b> of this phrase in context and search through a list of <b>closely-related</b> and <b>distant</b> entries 
+  in the three tabs below. Click on the linked related entries to go to their respective pages and compare locations on the plot. 
+  <i>{data.slug.entry}</i> appears in the right-hand plot highlighted in red. 
+  <br><br>
+  <i><h3><a href="/info" class="highlighted-link">Where does this plot come from?</a></h3></i>
+   </p>
 </div>
 <div class="small-chart-container">
   <LayerCake
@@ -162,11 +125,11 @@
           <TableHeadCell>Document</TableHeadCell>
           <TableHeadCell>Entry</TableHeadCell>
         </TableHead>
-        <TableBody class="divide-y">
+        <TableBody>
           {#each filteredExamples as item}
             <TableBodyRow>
               <TableBodyCell>{item.doc}</TableBodyCell>
-              <TableBodyCell>{item.example}</TableBodyCell>
+              <TableBodyCell>{item.sentence}</TableBodyCell>
             </TableBodyRow>
           {/each}
         </TableBody>
@@ -185,7 +148,7 @@
               <TableBodyRow>
                 <TableBodyCell>{item.id}</TableBodyCell>
                 <TableBodyCell>{item.distance}</TableBodyCell>
-                <TableBodyCell><a href="/vocab/{item.id}"><u>{item.entry}</u></a></TableBodyCell>
+                <TableBodyCell><a href="/vocab/{item.id}" class="highlighted-link" data-sveltekit-reload>{item.entry}</a></TableBodyCell>
               </TableBodyRow>
             {/each}
           </TableBody>
@@ -204,7 +167,7 @@
             <TableBodyRow>
               <TableBodyCell>{item.id}</TableBodyCell>
               <TableBodyCell>{item.distance}</TableBodyCell>
-              <TableBodyCell><a href="/vocab/{item.id}"><u>{item.entry}</u></a></TableBodyCell>
+              <TableBodyCell><a href="/vocab/{item.id}" class="highlighted-link" data-sveltekit-reload>{item.entry}</a></TableBodyCell>
             </TableBodyRow>
           {/each}
         </TableBody>
