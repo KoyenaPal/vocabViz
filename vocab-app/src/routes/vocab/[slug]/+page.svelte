@@ -40,6 +40,11 @@
   items.forEach(i => {
     plotData.push({'id': i.id, 'entry': i.entry, 'pca_x': i.vector[0], 'pca_y': i.vector[1]})
   });
+
+  let all_ids = [];
+  items.forEach(i => {
+    all_ids.push(i.id)
+  });
 </script>
 
 <div class="help-button"><a href="/info"><img src="/help.png"></a></div>
@@ -148,7 +153,11 @@
               <TableBodyRow>
                 <TableBodyCell>{item.id}</TableBodyCell>
                 <TableBodyCell>{item.distance}</TableBodyCell>
+                {#if item.id in all_ids}
                 <TableBodyCell><a href="/vocab/{item.id}" class="highlighted-link" data-sveltekit-reload>{item.entry}</a></TableBodyCell>
+                {:else}
+                <TableBodyCell>{item.entry}</TableBodyCell>
+                {/if} 
               </TableBodyRow>
             {/each}
           </TableBody>
@@ -167,7 +176,11 @@
             <TableBodyRow>
               <TableBodyCell>{item.id}</TableBodyCell>
               <TableBodyCell>{item.distance}</TableBodyCell>
-              <TableBodyCell><a href="/vocab/{item.id}" class="highlighted-link" data-sveltekit-reload>{item.entry}</a></TableBodyCell>
+              {#if item.id in all_ids}
+                <TableBodyCell><a href="/vocab/{item.id}" class="highlighted-link" data-sveltekit-reload>{item.entry}</a></TableBodyCell>
+                {:else}
+                <TableBodyCell>{item.entry}</TableBodyCell>
+                {/if}
             </TableBodyRow>
           {/each}
         </TableBody>
