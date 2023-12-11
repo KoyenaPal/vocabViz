@@ -1,6 +1,7 @@
 <script>
   /** @type {import('./$types').PageData} */
 	export let data;
+  import { base } from "$app/paths";
   import { Tabs, TabItem, Card } from 'flowbite-svelte';
   import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, TableSearch } from 'flowbite-svelte';
 
@@ -47,11 +48,11 @@
   });
 </script>
 
-<div class="help-button"><a href="/info"><img src="/help.png"></a></div>
-<div class="home-button"><a href="/"><img src="/home.png"></a></div>
+<div class="help-button"><a href="{base}/info"><img src="/help.png"></a></div>
+<div class="home-button"><a href="{base}/"><img src="/home.png"></a></div>
 
 <div class="pt-5 pl-5 pagetitle">
-  <center><h1><a href="/">Llama-2-7b Vocabulary</a></h1></center>
+  <center><h1><a href="{base}/">Llama-2-7b Vocabulary</a></h1></center>
   <!-- <center><h1>{data.slug.entry}</h1></center>
   <center><p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Confidence: {data.slug.confidence}</p></center> -->
 </div>
@@ -62,13 +63,13 @@
 <div class="childl">
   <!-- <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{data.slug.entry}</h5>
   <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight"><i>Confidence: {data.slug.confidence}</i></p> -->
-  <a href="/vocab/{data.slug.id}"><h1>{data.slug.entry}</h1></a> <h2>Confidence: {data.slug.confidence}</h2> 
+  <a href="{base}/vocab/{data.slug.id}"><h1>{data.slug.entry}</h1></a> <h2>Confidence: {data.slug.confidence}</h2> 
   <h3>Location: [{Math.round(data.slug.vector[0] * 1000)/1000}, {Math.round(data.slug.vector[1]*1000)/1000}]</h3> 
   <p class="home-text">Explore <b>examples</b> of this phrase in context and search through a list of <b>closely-related</b> and <b>distant</b> entries 
   in the three tabs below. Click on the linked related entries to go to their respective pages and compare locations on the plot. 
   <i>{data.slug.entry}</i> appears in the right-hand plot highlighted in red. 
   <br><br>
-  <i><h3><a href="/info" class="highlighted-link">Where does this plot come from?</a></h3></i>
+  <i><h3><a href="{base}/info" class="highlighted-link">Where does this plot come from?</a></h3></i>
    </p>
 </div>
 <div class="small-chart-container">
@@ -154,7 +155,7 @@
                 <TableBodyCell>{item.id}</TableBodyCell>
                 <TableBodyCell>{item.distance}</TableBodyCell>
                 {#if item.id in all_ids}
-                <TableBodyCell><a href="/vocab/{item.id}" class="highlighted-link" data-sveltekit-reload>{item.entry}</a></TableBodyCell>
+                <TableBodyCell><a href="{base}/vocab/{item.id}" class="highlighted-link" data-sveltekit-reload>{item.entry}</a></TableBodyCell>
                 {:else}
                 <TableBodyCell>{item.entry}</TableBodyCell>
                 {/if} 
@@ -177,7 +178,7 @@
               <TableBodyCell>{item.id}</TableBodyCell>
               <TableBodyCell>{item.distance}</TableBodyCell>
               {#if item.id in all_ids}
-                <TableBodyCell><a href="/vocab/{item.id}" class="highlighted-link" data-sveltekit-reload>{item.entry}</a></TableBodyCell>
+                <TableBodyCell><a href="{base}/vocab/{item.id}" class="highlighted-link" data-sveltekit-reload>{item.entry}</a></TableBodyCell>
                 {:else}
                 <TableBodyCell>{item.entry}</TableBodyCell>
                 {/if}

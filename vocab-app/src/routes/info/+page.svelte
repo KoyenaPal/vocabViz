@@ -1,5 +1,9 @@
-<div class="help-button"><a href="/info"><img src="/help.png"></a></div>
-<div class="home-button"><a href="/"><img src="/home.png"></a></div>
+<script>
+  import { base } from "$app/paths";
+</script>
+
+<div class="help-button"><a href="{base}/info"><img src="/help.png"></a></div>
+<div class="home-button"><a href="{base}/"><img src="/home.png"></a></div>
 
 
     <div class="pt-5 pl-20 pb-10 pr-20">

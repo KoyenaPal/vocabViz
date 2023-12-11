@@ -5,6 +5,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
+		"deploy": "gh-pages -d build -t true",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
@@ -15,6 +16,7 @@
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-static": "^2.0.3",
 		"@sveltejs/kit": "^1.27.4",
 		"@types/d3": "^7.4.3",
 		"autoprefixer": "^10.4.14",
@@ -36,6 +38,7 @@
 	"type": "module",
 	"dependencies": {
 		"d3-quadtree": "^3.0.1",
+		"gh-pages": "^6.1.0",
 		"layercake": "^8.0.2",
 		"papaparse": "^5.4.1",
 		"regl": "^2.1.0"

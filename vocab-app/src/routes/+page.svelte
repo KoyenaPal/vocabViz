@@ -1,7 +1,7 @@
 <script lang="ts">  
   /** @type {import('./$types').PageData} */
   export let data;
-
+  import { base } from "$app/paths";
   // search for pages functionality
   import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, TableSearch, Card } from 'flowbite-svelte';
   import {onMount} from 'svelte';
@@ -44,8 +44,8 @@
 
 </script>
 
-<div class="help-button"><a href="/info"><img src="/help.png"></a></div>
-<div class="home-button"><a href="/"><img src="/home.png"></a></div>
+<div class="help-button"><a href="{base}/info"><img src="/help.png"></a></div>
+<div class="home-button"><a href="{base}/"><img src="/home.png"></a></div>
 
 
 <center>
@@ -65,7 +65,7 @@
 <div class="parent">
   <center><i><h2>Examples of Llama-2 Concepts</h2></i></center>
   {#each items.slice(0,4) as item}
-  <div class="child"><Card href="/vocab/{item.id}">
+  <div class="child"><Card href="{base}/vocab/{item.id}">
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{item.entry}</h5>
     <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Confidence: {item.confidence}</p>
   </Card></div>
@@ -132,7 +132,7 @@
       {#each filteredItems as item}
         <TableBodyRow>
           <TableBodyCell>{item.id}</TableBodyCell>
-          <TableBodyCell><a href="/vocab/{item.id}" class="highlighted-link">{item.entry}</a></TableBodyCell>
+          <TableBodyCell><a href="{base}/vocab/{item.id}" class="highlighted-link">{item.entry}</a></TableBodyCell>
           <TableBodyCell>{item.confidence}</TableBodyCell>
           <TableBodyCell>{item.examples[0].sentence}</TableBodyCell>
         </TableBodyRow>
