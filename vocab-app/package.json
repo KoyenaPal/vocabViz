@@ -2,6 +2,7 @@
 	"name": "vocab-app",
 	"version": "0.0.1",
 	"private": true,
+	"homepage": "https://koyenapal.github.io/vocabViz/",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
